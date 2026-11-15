@@ -134,6 +134,28 @@ h2{font-size:clamp(30px,4vw,46px);line-height:1.05;letter-spacing:-.04em;margin:
   .stat{border-right:0;border-bottom:1px solid var(--line)}
   h1{font-size:42px}
 }
+
+/* ── Contenido heredado del proyecto original, en clave sobria ── */
+.rich{max-width:78ch}
+.rich p{margin:0 0 14px;color:#c3d4da}
+.rich h3{margin:26px 0 10px;font-size:19px;letter-spacing:-.02em}
+.rich h4{margin:22px 0 8px;font-size:15px;letter-spacing:-.01em}
+.rich ul,.rich ol{margin:0 0 16px;padding-left:22px;color:#c3d4da}
+.rich li{margin:0 0 6px}
+.rich figure{margin:22px 0;border:1px solid var(--line);border-radius:16px;padding:10px;background:rgba(11,34,43,.5)}
+.rich figure img{width:100%;display:block;border-radius:10px}
+.rich figcaption{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:9px;line-height:1.5}
+.rich .table-wrap{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:12px}
+.rich table{border-collapse:collapse;width:100%;font-size:13.5px}
+.rich th,.rich td{padding:9px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.rich th{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:rgba(11,34,43,.6)}
+.rich tr:last-child td{border-bottom:0}
+.rich pre{margin:18px 0;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:#04141a;overflow-x:auto;font-family:var(--mono);font-size:12px;line-height:1.6;color:#cfe3e8}
+.rich code{font-family:var(--mono);font-size:.92em}
+.rich .note{margin:18px 0;padding:13px 16px;border-left:2px solid var(--accent);background:rgba(42,157,143,.07);color:#c3d4da;font-size:14px}
+.rich .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:18px 0}
+.rich .card-grid .card{margin:0}
+
 </style>
 <link rel="stylesheet" href="assets/community.css?v=1">
 </head>
@@ -182,36 +204,52 @@ h2{font-size:clamp(30px,4vw,46px);line-height:1.05;letter-spacing:-.04em;margin:
   <a href="https://github.com/jmadasme/detector-tarjetas/tree/main/versions/detector-tarjetas-completo" target="_blank" rel="noopener">Ver carpeta <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
 </article></div>
 </div></section>
-
-<section class="section tight"><div class="wrap">
-  <div class="section-head reveal"><div class="kicker">03 — Cómo se usa</div><h2>De la carpeta a la práctica.</h2></div>
-  <div class="timeline"><div class="step reveal"><div class="step-n">01</div><h4>Conectá la cámara</h4><p>Una webcam USB UVC en /dev/video0, o la cámara del notebook para probar.</p></div><div class="step reveal"><div class="step-n">02</div><h4>Enseñá las placas</h4><p>En /teach capturá varias muestras por etiqueta, con ángulos y luces distintas.</p></div><div class="step reveal"><div class="step-n">03</div><h4>Desplegá en la placa</h4><p>Copiá el proyecto por SSH, instalá systemd y verificá /api/health.</p></div><div class="step reveal"><div class="step-n">04</div><h4>Apuntá y leé</h4><p>Cada placa detectada muestra MCU, RAM y reloj; el clic abre la ficha completa.</p></div></div>
-</div></section>
-
-<section class="section tight"><div class="wrap">
-  <div class="section-head reveal"><div class="kicker">04 — Decisiones</div><h2>Lo que lo hace distinto</h2></div>
-  <div class="features"><div class="feature reveal"><h4>Sin modelos externos</h4><p>Nada de pesos, nube ni GPU: solo OpenCV del sistema.</p></div><div class="feature reveal"><h4>Detección multinstancia</h4><p>Varias placas distintas y varias copias del mismo modelo a la vez.</p></div><div class="feature reveal"><h4>Modo enseñar</h4><p>Las plantillas se capturan y recargan desde el navegador, en caliente.</p></div><div class="feature reveal"><h4>Fichas técnicas</h4><p>MCU, reloj, RAM, GPIO, voltaje y enlace oficial de cada placa.</p></div><div class="feature reveal"><h4>Escena de cómic</h4><p>Recuadros con esquinas de visor y globos que evitan solaparse.</p></div><div class="feature reveal"><h4>Tolerancia a fallos</h4><p>Sin cámara responde con un frame de estado y la API sigue en pie.</p></div></div>
-</div></section>
-
-<section class="section tight" id="stack"><div class="wrap">
-  <div class="section-head reveal"><div class="kicker">05 — Stack y arranque</div><h2>Con qué está construido</h2></div>
-  <div class="stack-grid">
-    <div class="reveal"><div class="chips"><span class="chip">Arduino UNO Q</span><span class="chip">Python</span><span class="chip">OpenCV</span><span class="chip">ORB</span><span class="chip">RANSAC</span><span class="chip">MJPEG</span></div><div class="note"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span>La placa necesita una webcam USB y python3-opencv. El reconocimiento cubre solo las etiquetas enseñadas: una placa nueva exige capturar sus muestras.</span></div></div>
-    <div class="terminal reveal"><div class="terminal-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><pre>git clone https://github.com/jmadasme/detector-tarjetas.git
-cd detector-tarjetas/versions/detector-tarjetas-completo
-./scripts/run_local.sh            # notebook + webcam en el puerto 8000
-# en la placa:
-./scripts/deploy.sh --host &lt;IP_UNO_Q&gt; --user arduino</pre></div>
-  </div>
-</div></section>
-
-<section class="section tight" id="docs"><div class="wrap">
-  <div class="section-head reveal"><div class="kicker">06 — Documentación</div><h2>Para usar y para entender.</h2><p class="section-sub">Cada documento está en el repositorio, versionado junto al código.</p></div>
-  <div class="docs"><a class="doc reveal" href="https://github.com/jmadasme/detector-tarjetas/blob/main/docs/datasheet.md" target="_blank" rel="noopener"><span class="tag">DATASHEET</span><h4>Manual de operación</h4><p>Instalación, configuración, uso y diagnóstico.</p></a><a class="doc reveal" href="https://github.com/jmadasme/detector-tarjetas/blob/main/docs/developer.md" target="_blank" rel="noopener"><span class="tag">DEVELOPER</span><h4>Guía de código</h4><p>Arquitectura, módulos, contratos y extensión.</p></a><a class="doc reveal" href="https://github.com/jmadasme/detector-tarjetas/blob/main/docs/REFERENCES.md" target="_blank" rel="noopener"><span class="tag">REFERENCES</span><h4>Referencias</h4><p>Estándares, librerías y fuentes oficiales.</p></a><a class="doc reveal" href="https://github.com/jmadasme/detector-tarjetas/blob/main/docs/BITACORA.md" target="_blank" rel="noopener"><span class="tag">BITÁCORA</span><h4>Decisiones y pruebas</h4><p>Qué se intentó, qué falló y por qué se cambió.</p></a></div>
-</div></section>
-
-<section class="section tight"><div class="wrap"><div class="note reveal"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><span><strong>Preservación:</strong> las versiones se copiaron sin <code>.git</code>, <code>node_modules</code>, entornos virtuales, compilados ni bases de datos. Los tokens y claves detectados fueron redactados; las plantillas <code>.example</code> se conservan. Las limitaciones conocidas están en la documentación, no escondidas.</span></div></div></section>
-
+<section class="section tight"><div class="wrap"><div class="section-head reveal"><div class="kicker">01 — La idea</div><h2>El problema y la solución</h2><p class="section-sub">Qué resuelve y por qué está construido así.</p></div><div class="rich reveal"><div class="card-grid">
+<div class="card"><h3>El problema</h3><div><div></div><p>Identificar una placa electrónica a simple vista no es trivial: hay decenas de modelos parecidos y el dato técnico (MCU, RAM, reloj) no está impreso en la placa. Un clasificador con red neuronal pide dataset etiquetado, GPU y nube.</p></div></div>
+<div class="card"><h3>La solución</h3><div><div></div><p>Visión clásica con ORB + homografía: extrae features locales de cada placa, las compara contra plantillas y dibuja una ficha técnica en vivo. 100 % local, sin modelos entrenados, con un modo enseñar para sumar placas nuevas.</p></div></div>
+</div></div></div></section>
+<section class="section"><div class="wrap"><div class="section-head reveal"><div class="kicker">02 — El recorrido</div><h2>Cómo funciona, paso a paso</h2><p class="section-sub">El recorrido desde el frame hasta la ficha dibujada.</p></div><div class="rich reveal"><div class="timeline">
+<div class="step"><div class="step-n">01</div><h4>Captura</h4><div><p>Recibe frames de una cámara IP (Android «IP Webcam» vía FFMPEG) o de una webcam USB por V4L2. La URL de cámara se cambia en vivo desde la página sin reiniciar el servicio.</p></div></div>
+<div class="step"><div class="step-n">02</div><h4>ORB</h4><div><p>Extrae hasta 500 keypoints por frame con ORB: detector y descriptor binario rápido, sin modelos entrenados ni pesos descargados.</p></div></div>
+<div class="step"><div class="step-n">03</div><h4>Matching de Lowe</h4><div><p>Empareja descriptores por distancia de Hamming y aplica el ratio test de Lowe (0.75) para descartar matches ambiguos.</p></div></div>
+<div class="step"><div class="step-n">04</div><h4>Homografía RANSAC</h4><div><p>Estima la homografía de cada plantilla y cuenta los inliers (≥20). Es lo que separa una detección real de un falso positivo.</p></div></div>
+<div class="step"><div class="step-n">05</div><h4>Score + NMS</h4><div><p>Calcula el score por inliers, suprime duplicados (NMS, IoU 0.30) y solo reporta la placa si supera el umbral de 0.60.</p></div></div>
+<div class="step"><div class="step-n">06</div><h4>Canvas + globo</h4><div><p>Dibuja sobre el stream MJPEG un globo cómic estabilizado con la ficha técnica (MCU, RAM, reloj) de la placa reconocida.</p></div></div>
+</div></div></div></section>
+<section class="section tight"><div class="wrap"><div class="section-head reveal"><div class="kicker">03 — Bajo el capó</div><h2>Cómo está construido</h2><p class="section-sub">Una vista de los componentes principales y cómo se conectan.</p></div><div class="rich reveal"><figure><img src="img/board-uno.jpg" alt="Una de las placas del catálogo detectada por ORB + homografía" loading="lazy"><figcaption>Una de las 9 placas del catálogo: detección por ORB + homografía RANSAC.</figcaption></figure>
+<div class="card-grid">
+<div class="card"><h3>Cámara IP / webcam</h3><div><p>Android «IP Webcam» vía FFMPEG o webcam USB por V4L2. URL editable en vivo desde la página (POST /api/camera).</p></div></div>
+<div class="card"><h3>Servidor HTTP</h3><div><p>stdlib http.server en el puerto 8000: stream MJPEG, API JSON, modo enseñar y estáticos. Sin pip ni frameworks.</p></div></div>
+<div class="card"><h3>Detector ORB + RANSAC</h3><div><p>ORB → BFMatcher Hamming → ratio test → homografía → NMS → score. Todo en un worker que corre en la UNO Q.</p></div></div>
+</div></div></div></section>
+<section class="section"><div class="wrap"><div class="section-head reveal"><div class="kicker">04 — Lo que lo hace distinto</div><h2>Decisiones de ingeniería</h2><p class="section-sub">Decisiones que hacen que el proyecto sea útil, mantenible y honesto.</p></div><div class="rich reveal"><div class="features">
+<div class="feature"><h3>Sin modelos externos</h3><div><p>ORB + RANSAC puro: no hay red neuronal, ni GPU, ni nube. Todo corre en el lado Linux de la UNO Q.</p></div></div>
+<div class="feature"><h3>Modo enseñar</h3><div><p>/teach genera plantillas ORB (.npz) apuntando la cámara a una placa nueva, sin tocar código ni reiniciar.</p></div></div>
+<div class="feature"><h3>Globo estabilizado</h3><div><p>Mediana + EMA + zona muerta de 18 px: el globo no parpadea ni salta aunque la detección vibre entre frames.</p></div></div>
+<div class="feature"><h3>Cámara editable en vivo</h3><div><p>Cambiá la fuente (IP cam o webcam) desde la página sin reiniciar el servicio. URL validada contra http/https/rtsp.</p></div></div>
+<div class="feature"><h3>Despliegue systemd</h3><div><p>Servicio detector-tarjetas.service en la UNO Q, con discover_unoq.sh para encontrarla en la LAN y deploy.sh para publicar.</p></div></div>
+<div class="feature"><h3>41 tests</h3><div><p>Pytest cubre API, cámara, detector, teach y UI: 41/41 en verde. Lo que no está probado se declara.</p></div></div>
+</div></div></div></section>
+<section class="section tight"><div class="wrap"><div class="section-head reveal"><div class="kicker">05 — Resultados medidos</div><h2>Lo que se mide, se verifica</h2><p class="section-sub">Sin «magia»: detección real sobre hardware real y límites claros.</p></div><div class="rich reveal"><figure><img src="img/board-uno.jpg" alt="Placa del catálogo usada como plantilla ORB" loading="lazy"><figcaption>Plantilla ORB de una placa del catálogo, generada desde /teach.</figcaption></figure>
+<div class="card-grid">
+<div class="card"><h3>Métricas de referencia</h3><div><p>9 placas en boards.json<br/>score 0,90–0,94 con Raspberry Pi 2 real<br/>24 muestras · 41 tests passed<br/>puerto 8000 · stream MJPEG 15 fps<br/>100 % local · sin nube ni GPU<br/>umbral score 0,60 · inliers ≥ 20</p></div></div>
+</div></div></div></section>
+<section class="section"><div class="wrap"><div class="section-head reveal"><div class="kicker">06 — Stack y arranque</div><h2>Con qué está construido</h2><p class="section-sub">Tecnologías y herramientas que sostienen el proyecto.</p></div><div class="rich reveal"><p>Arduino UNO Q Debian 13 Python 3 OpenCV NumPy ORB http.server pytest Sin pip ni frameworks web: stdlib + OpenCV + NumPy, instalables con apt en la UNO Q.</p>
+<p>bash — detector-tarjetas</p>
+<pre><span># En la UNO Q (o local): dependencias con apt, sin pip</span>
+<span>$</span> sudo apt install python3-opencv python3-numpy
+<span># Corre local con webcam o cámara IP</span>
+<span>$</span> ./scripts/run_local.sh
+<span># Despliega a la placa por ssh (puerto 2222)</span>
+<span>$</span> ./scripts/deploy.sh</pre></div></div></section>
+<section class="section tight"><div class="wrap"><div class="section-head reveal"><div class="kicker">07 — Documentación</div><h2>Todo está escrito</h2><p class="section-sub">Cada decisión, cada límite y cada comando están documentados en el repositorio. Sin folletos: lo que funciona se muestra, lo que no, también.</p></div><div class="rich reveal"><div class="card-grid">
+<a class="card" href=""><h3>Guía completa</h3><p>Qué es, cómo funciona, instalación y límites.</p></a>
+<a class="card" href=""><h3>Manual de operación</h3><p>Requisitos, uso, parámetros y diagnóstico.</p></a>
+<a class="card" href=""><h3>Guía de código</h3><p>Arquitectura, módulos y extensión.</p></a>
+<a class="card" href=""><h3>Estado actual</h3><p>Cómo quedó el proyecto tal como está construido.</p></a>
+<a class="card" href=""><h3>Despliegue en UNO Q</h3><p>systemd, SSH, cámara IP y arranque real.</p></a>
+<a class="card" href=""><h3>Bitácora</h3><p>Registro de decisiones y evolución del proyecto.</p></a>
+</div></div></div></section>
 <section class="cta"><div class="wrap"><div class="cta-box reveal">
   <div class="kicker">Siguiente paso</div><h2>¿Te animás?</h2>
   <p>Usá esta familia como base para detector de tarjetas. Está documentada para que puedas entenderla, ejecutarla y continuarla sin adivinar.</p>
