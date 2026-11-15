@@ -34,6 +34,60 @@ cd detector-tarjetas/versions/detector-tarjetas-completo
 
 La placa necesita una webcam USB y python3-opencv. El reconocimiento cubre solo las etiquetas enseñadas: una placa nueva exige capturar sus muestras.
 
+<!-- ficha -->
+## Ficha de evaluación
+
+**Madurez global: 3.3/5**
+
+| Criterio | Nota | Evidencia |
+|---|---:|---|
+| Madurez | 3/5 | 41 pruebas y auditoría sin incidencias; el despliegue físico en la UNO Q quedó pendiente por falta de acceso. |
+| Reproducibilidad | 2/5 | El modo local funciona con webcam y OpenCV; en la placa exige SSH o ADB, y esa instalación no se verificó. |
+| Documentación | 4/5 | README, bitácora con las incidencias P-01 a P-08, datasheet y guía de desarrollador cubren operación y despliegue. |
+| Honestidad de límites | 5/5 | Declara el despliegue no completado, la ausencia de autenticación y que solo reconoce las etiquetas enseñadas. |
+| Valor demostrativo | 4/5 | Muestra visión clásica multiinstancia, modo enseñar en caliente y fichas técnicas sin pesos externos. |
+| Facilidad de despliegue | 2/5 | El entorno local se levanta con un script; la instalación en placa depende de un acceso que no se logró. |
+
+Aplicación de visión clásica bien probada en laboratorio, con el despliegue en placa aún pendiente. Útil como demostración didáctica; no está lista para operar sin esa verificación.
+
+## Lo que no funcionó
+
+### detector-tarjetas-completo — Placa inaccesible para desplegar
+
+La UNO Q de destino, en 192.168.1.4, respondía ping y ARP pero no exponía ningún puerto TCP: ni SSH, ni HTTP, ni mDNS. Se documentaron tres caminos de instalación —habilitar SSH desde App Lab, desplegar por ADB o copiar a mano— y el despliegue físico quedó pendiente. El código y los scripts sí están terminados.
+
+### detector-tarjetas-completo — La segunda placa igual no se detectaba
+
+Con dos Arduino UNO R3 iguales, el ratio test descartaba la segunda copia porque sus descriptores coincidían con la misma plantilla. Se repite el matching hasta cuatro veces por plantilla, se eliminan los keypoints dentro de la caja ya aceptada con ocho píxeles de margen y se agrupan las detecciones cercanas a 40 px.
+
+### detector-tarjetas-completo — Homografías degeneradas generaban cajas imposibles
+
+RANSAC devolvía homografías degeneradas que producían cajas gigantes o fuera del encuadre. Se añadieron validaciones de proyección finita, caja mayor a un píxel, proporción de relleno mínima del 20 %, recorte al frame, tamaño mínimo de 8×8 y área entre 2 % y 90 %. Es la incidencia P-07 de la bitácora.
+
+## Preguntas típicas
+
+**¿Usa inteligencia artificial?**
+
+No en el sentido de redes neuronales: es visión clásica con ORB y homografía, sin entrenamiento pesado.
+
+**¿Qué placas reconoce de fábrica?**
+
+Arduino UNO R3, Arduino Nano, Raspberry Pi 4 y Raspberry Pi 5 como punto de partida.
+
+**¿Puedo agregar otra placa?**
+
+Sí, desde /teach: capturás muestras de su etiqueta y quedan disponibles sin reiniciar el detector.
+
+**¿Funciona de noche o con poca luz?**
+
+Necesita ver la etiqueta con contraste. Con poca luz baja la cantidad de keypoints y la detección se vuelve intermitente.
+
+**¿Está protegido con contraseña?**
+
+No. Está pensado para una LAN de confianza; no lo expongas directo a Internet.
+
+<!-- /ficha -->
+
 ## Documentación
 
 - [`docs/datasheet.md`](docs/datasheet.md) — instalación, operación y límites.
@@ -41,9 +95,9 @@ La placa necesita una webcam USB y python3-opencv. El reconocimiento cubre solo 
 - [`docs/REFERENCES.md`](docs/REFERENCES.md) — estándares, librerías y fuentes.
 - [`docs/index.html`](docs/index.html) — página del proyecto (GitHub Pages).
 
-## Alcance y honestidad
+## El proyecto en detalle
 
-## 🔍 Detector de tarjetas · Arduino UNO Q
+### 🔍 Detector de tarjetas · Arduino UNO Q
 
 **Visión artificial en tiempo real, 100 % local, sin modelos externos.**
 

@@ -156,6 +156,39 @@ h2{font-size:clamp(30px,4vw,46px);line-height:1.05;letter-spacing:-.04em;margin:
 .rich .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:18px 0}
 .rich .card-grid .card{margin:0}
 
+
+.rich h3{margin:26px 0 8px}
+.rich p{margin:0 0 14px;color:var(--muted);line-height:1.7}
+.fail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:6px}
+.fail{background:rgba(11,34,43,.55);border:1px solid var(--line);border-radius:14px;padding:18px}
+.fail .v{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--warm,#D6A86A)}
+.fail h3{font-size:16px;margin:8px 0 6px}
+.fail p{font-size:14px;margin:0;color:var(--muted)}
+.rating-head{display:flex;align-items:center;gap:20px;margin:6px 0 18px;padding:18px 20px;border:1px solid var(--line);border-radius:16px;background:rgba(11,34,43,.55)}
+.rating-avg{font-family:var(--mono);font-size:40px;line-height:1;color:var(--accent)}
+.rating-avg small{font-size:14px;color:var(--muted)}
+.rating-head p{margin:4px 0 0;font-size:14px;color:var(--muted);max-width:70ch}
+.rating{display:grid;gap:2px}
+.rating-row{display:grid;grid-template-columns:165px minmax(90px,1fr) 48px;gap:14px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line)}
+.rating-row:last-child{border-bottom:0}
+.rating-name{font-size:13.5px;font-weight:600}
+.rating-bar{height:6px;border-radius:99px;background:rgba(148,190,200,.14);overflow:hidden}
+.rating-bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+.rating-score{font-family:var(--mono);font-size:12.5px;color:var(--accent);text-align:right}
+.rating-note{grid-column:2/-1;font-size:12.5px;color:var(--muted);margin-top:-4px}
+.faq{display:grid;gap:0;margin-top:4px}
+.faq details{border-bottom:1px solid var(--line);padding:14px 0}
+.faq summary{cursor:pointer;font-weight:600;font-size:15px;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::before{content:"+";display:inline-block;width:18px;color:var(--accent);font-family:var(--mono)}
+.faq details[open] summary::before{content:"–"}
+.faq p{margin:10px 0 0 18px;font-size:14px;color:var(--muted)}
+@media(max-width:720px){
+  .fail-grid{grid-template-columns:1fr}
+  .rating-head{flex-direction:column;align-items:flex-start}
+  .rating-row{grid-template-columns:120px 1fr 44px}
+}
+
 </style>
 <link rel="stylesheet" href="assets/community.css?v=1">
 </head>
@@ -188,15 +221,7 @@ h2{font-size:clamp(30px,4vw,46px);line-height:1.05;letter-spacing:-.04em;margin:
 
 <section class="stats"><div class="wrap stats-grid"><div class="stat"><div class="stat-num">1</div><div class="stat-label">versión</div></div><div class="stat"><div class="stat-num">15</div><div class="stat-label">fps stream</div></div><div class="stat"><div class="stat-num">250</div><div class="stat-label">ms inferencia</div></div><div class="stat"><div class="stat-num">0</div><div class="stat-label">GPU</div></div></div></section>
 
-<section class="section" id="proyecto"><div class="wrap">
-  <div class="section-head reveal"><div class="kicker">01 — El proyecto</div><h2>Qué resuelve</h2><p class="section-sub">Una aplicación web de visión en tiempo real que reconoce placas de desarrollo a partir de las etiquetas que el propio usuario enseña desde el navegador. No usa redes neuronales ni pesos descargados: ORB, el ratio test de Lowe y una homografía RANSAC alcanzan para detectar varias placas en el mismo cuadro y mostrar su ficha técnica en globos de cómic.</p></div>
-  <div class="two">
-    <div class="card reveal"><span class="tag">Problema</span><h3>El punto de partida</h3><p>Identificar qué placa hay frente a la cámara suele requerir un modelo entrenado, GPU o una conexión a la nube, y aun así falla con etiquetas nuevas que nadie entrenó.</p></div>
-    <div class="card reveal"><span class="tag">Solución</span><h3>La propuesta</h3><p>Usar el texto y los gráficos de la propia etiqueta como plantilla: ORB encuentra los puntos característicos y la homografía confirma que la geometría coincide.</p></div>
-  </div>
-</div></section>
-
-<section class="section" id="versiones"><div class="wrap">
+<section class="section tight"><div class="wrap"><div class="section-head reveal"><div class="kicker">El concepto</div><h2>Qué es y por qué existe</h2></div><div class="rich reveal"><p>Detector de Tarjetas reconoce placas de desarrollo por sus etiquetas, sin redes neuronales ni modelos descargados. La aplicación web captura video MJPEG, extrae puntos ORB de las plantillas que el usuario enseña desde el navegador, aplica el ratio test de Lowe y confirma la geometría con una homografía RANSAC. Cada placa detectada muestra su ficha técnica en globos de cómic y admite varias copias del mismo modelo en el cuadro.</p><p>Está orientado a talleres, aulas y demostraciones donde se quiere explicar visión clásica con resultados visibles y sin GPU. El modo enseñar permite agregar etiquetas nuevas en caliente. La versión documentada incluye 41 pruebas y una auditoría sin incidencias, pero el despliegue físico en la UNO Q no se completó porque la placa no era accesible por red ni por ADB; el código y los scripts quedaron listos.</p></div></div></section><section class="section" id="versiones"><div class="wrap">
   <div class="section-head reveal"><div class="kicker">02 — Versiones</div><h2>La historia, completa.</h2><p class="section-sub">Cada carpeta conserva una etapa del proyecto. No se borraron las anteriores: se pusieron en contexto.</p></div>
   <div class="versions"><article class="version reveal">
   <div class="version-top"><h3>detector-tarjetas-completo</h3><span class="count">53 archivos</span></div>
@@ -204,11 +229,11 @@ h2{font-size:clamp(30px,4vw,46px);line-height:1.05;letter-spacing:-.04em;margin:
   <a href="https://github.com/jmadasme/detector-tarjetas/tree/main/versions/detector-tarjetas-completo" target="_blank" rel="noopener">Ver carpeta <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
 </article></div>
 </div></section>
-<section class="section tight"><div class="wrap"><div class="section-head reveal"><div class="kicker">01 — La idea</div><h2>El problema y la solución</h2><p class="section-sub">Qué resuelve y por qué está construido así.</p></div><div class="rich reveal"><div class="card-grid">
+<section class="section tight"><div class="wrap"><div class="section-head reveal"><div class="kicker">03 — La idea</div><h2>El problema y la solución</h2><p class="section-sub">Qué resuelve y por qué está construido así.</p></div><div class="rich reveal"><div class="card-grid">
 <div class="card"><h3>El problema</h3><div><div></div><p>Identificar una placa electrónica a simple vista no es trivial: hay decenas de modelos parecidos y el dato técnico (MCU, RAM, reloj) no está impreso en la placa. Un clasificador con red neuronal pide dataset etiquetado, GPU y nube.</p></div></div>
 <div class="card"><h3>La solución</h3><div><div></div><p>Visión clásica con ORB + homografía: extrae features locales de cada placa, las compara contra plantillas y dibuja una ficha técnica en vivo. 100 % local, sin modelos entrenados, con un modo enseñar para sumar placas nuevas.</p></div></div>
 </div></div></div></section>
-<section class="section"><div class="wrap"><div class="section-head reveal"><div class="kicker">02 — El recorrido</div><h2>Cómo funciona, paso a paso</h2><p class="section-sub">El recorrido desde el frame hasta la ficha dibujada.</p></div><div class="rich reveal"><div class="timeline">
+<section class="section"><div class="wrap"><div class="section-head reveal"><div class="kicker">04 — El recorrido</div><h2>Cómo funciona, paso a paso</h2><p class="section-sub">El recorrido desde el frame hasta la ficha dibujada.</p></div><div class="rich reveal"><div class="timeline">
 <div class="step"><div class="step-n">01</div><h4>Captura</h4><div><p>Recibe frames de una cámara IP (Android «IP Webcam» vía FFMPEG) o de una webcam USB por V4L2. La URL de cámara se cambia en vivo desde la página sin reiniciar el servicio.</p></div></div>
 <div class="step"><div class="step-n">02</div><h4>ORB</h4><div><p>Extrae hasta 500 keypoints por frame con ORB: detector y descriptor binario rápido, sin modelos entrenados ni pesos descargados.</p></div></div>
 <div class="step"><div class="step-n">03</div><h4>Matching de Lowe</h4><div><p>Empareja descriptores por distancia de Hamming y aplica el ratio test de Lowe (0.75) para descartar matches ambiguos.</p></div></div>
@@ -216,13 +241,13 @@ h2{font-size:clamp(30px,4vw,46px);line-height:1.05;letter-spacing:-.04em;margin:
 <div class="step"><div class="step-n">05</div><h4>Score + NMS</h4><div><p>Calcula el score por inliers, suprime duplicados (NMS, IoU 0.30) y solo reporta la placa si supera el umbral de 0.60.</p></div></div>
 <div class="step"><div class="step-n">06</div><h4>Canvas + globo</h4><div><p>Dibuja sobre el stream MJPEG un globo cómic estabilizado con la ficha técnica (MCU, RAM, reloj) de la placa reconocida.</p></div></div>
 </div></div></div></section>
-<section class="section tight"><div class="wrap"><div class="section-head reveal"><div class="kicker">03 — Bajo el capó</div><h2>Cómo está construido</h2><p class="section-sub">Una vista de los componentes principales y cómo se conectan.</p></div><div class="rich reveal"><figure><img src="img/board-uno.jpg" alt="Una de las placas del catálogo detectada por ORB + homografía" loading="lazy"><figcaption>Una de las 9 placas del catálogo: detección por ORB + homografía RANSAC.</figcaption></figure>
+<section class="section tight"><div class="wrap"><div class="section-head reveal"><div class="kicker">05 — Bajo el capó</div><h2>Cómo está construido</h2><p class="section-sub">Una vista de los componentes principales y cómo se conectan.</p></div><div class="rich reveal"><figure><img src="img/board-uno.jpg" alt="Una de las placas del catálogo detectada por ORB + homografía" loading="lazy"><figcaption>Una de las 9 placas del catálogo: detección por ORB + homografía RANSAC.</figcaption></figure>
 <div class="card-grid">
 <div class="card"><h3>Cámara IP / webcam</h3><div><p>Android «IP Webcam» vía FFMPEG o webcam USB por V4L2. URL editable en vivo desde la página (POST /api/camera).</p></div></div>
 <div class="card"><h3>Servidor HTTP</h3><div><p>stdlib http.server en el puerto 8000: stream MJPEG, API JSON, modo enseñar y estáticos. Sin pip ni frameworks.</p></div></div>
 <div class="card"><h3>Detector ORB + RANSAC</h3><div><p>ORB → BFMatcher Hamming → ratio test → homografía → NMS → score. Todo en un worker que corre en la UNO Q.</p></div></div>
 </div></div></div></section>
-<section class="section"><div class="wrap"><div class="section-head reveal"><div class="kicker">04 — Lo que lo hace distinto</div><h2>Decisiones de ingeniería</h2><p class="section-sub">Decisiones que hacen que el proyecto sea útil, mantenible y honesto.</p></div><div class="rich reveal"><div class="features">
+<section class="section"><div class="wrap"><div class="section-head reveal"><div class="kicker">06 — Lo que lo hace distinto</div><h2>Decisiones de ingeniería</h2><p class="section-sub">Decisiones que hacen que el proyecto sea útil, mantenible y honesto.</p></div><div class="rich reveal"><div class="features">
 <div class="feature"><h3>Sin modelos externos</h3><div><p>ORB + RANSAC puro: no hay red neuronal, ni GPU, ni nube. Todo corre en el lado Linux de la UNO Q.</p></div></div>
 <div class="feature"><h3>Modo enseñar</h3><div><p>/teach genera plantillas ORB (.npz) apuntando la cámara a una placa nueva, sin tocar código ni reiniciar.</p></div></div>
 <div class="feature"><h3>Globo estabilizado</h3><div><p>Mediana + EMA + zona muerta de 18 px: el globo no parpadea ni salta aunque la detección vibre entre frames.</p></div></div>
@@ -230,11 +255,11 @@ h2{font-size:clamp(30px,4vw,46px);line-height:1.05;letter-spacing:-.04em;margin:
 <div class="feature"><h3>Despliegue systemd</h3><div><p>Servicio detector-tarjetas.service en la UNO Q, con discover_unoq.sh para encontrarla en la LAN y deploy.sh para publicar.</p></div></div>
 <div class="feature"><h3>41 tests</h3><div><p>Pytest cubre API, cámara, detector, teach y UI: 41/41 en verde. Lo que no está probado se declara.</p></div></div>
 </div></div></div></section>
-<section class="section tight"><div class="wrap"><div class="section-head reveal"><div class="kicker">05 — Resultados medidos</div><h2>Lo que se mide, se verifica</h2><p class="section-sub">Sin «magia»: detección real sobre hardware real y límites claros.</p></div><div class="rich reveal"><figure><img src="img/board-uno.jpg" alt="Placa del catálogo usada como plantilla ORB" loading="lazy"><figcaption>Plantilla ORB de una placa del catálogo, generada desde /teach.</figcaption></figure>
+<section class="section tight"><div class="wrap"><div class="section-head reveal"><div class="kicker">07 — Resultados medidos</div><h2>Lo que se mide, se verifica</h2><p class="section-sub">Sin «magia»: detección real sobre hardware real y límites claros.</p></div><div class="rich reveal"><figure><img src="img/board-uno.jpg" alt="Placa del catálogo usada como plantilla ORB" loading="lazy"><figcaption>Plantilla ORB de una placa del catálogo, generada desde /teach.</figcaption></figure>
 <div class="card-grid">
 <div class="card"><h3>Métricas de referencia</h3><div><p>9 placas en boards.json<br/>score 0,90–0,94 con Raspberry Pi 2 real<br/>24 muestras · 41 tests passed<br/>puerto 8000 · stream MJPEG 15 fps<br/>100 % local · sin nube ni GPU<br/>umbral score 0,60 · inliers ≥ 20</p></div></div>
 </div></div></div></section>
-<section class="section"><div class="wrap"><div class="section-head reveal"><div class="kicker">06 — Stack y arranque</div><h2>Con qué está construido</h2><p class="section-sub">Tecnologías y herramientas que sostienen el proyecto.</p></div><div class="rich reveal"><p>Arduino UNO Q Debian 13 Python 3 OpenCV NumPy ORB http.server pytest Sin pip ni frameworks web: stdlib + OpenCV + NumPy, instalables con apt en la UNO Q.</p>
+<section class="section"><div class="wrap"><div class="section-head reveal"><div class="kicker">08 — Stack y arranque</div><h2>Con qué está construido</h2><p class="section-sub">Tecnologías y herramientas que sostienen el proyecto.</p></div><div class="rich reveal"><p>Arduino UNO Q Debian 13 Python 3 OpenCV NumPy ORB http.server pytest Sin pip ni frameworks web: stdlib + OpenCV + NumPy, instalables con apt en la UNO Q.</p>
 <p>bash — detector-tarjetas</p>
 <pre><span># En la UNO Q (o local): dependencias con apt, sin pip</span>
 <span>$</span> sudo apt install python3-opencv python3-numpy
@@ -242,15 +267,14 @@ h2{font-size:clamp(30px,4vw,46px);line-height:1.05;letter-spacing:-.04em;margin:
 <span>$</span> ./scripts/run_local.sh
 <span># Despliega a la placa por ssh (puerto 2222)</span>
 <span>$</span> ./scripts/deploy.sh</pre></div></div></section>
-<section class="section tight"><div class="wrap"><div class="section-head reveal"><div class="kicker">07 — Documentación</div><h2>Todo está escrito</h2><p class="section-sub">Cada decisión, cada límite y cada comando están documentados en el repositorio. Sin folletos: lo que funciona se muestra, lo que no, también.</p></div><div class="rich reveal"><div class="card-grid">
+<section class="section tight"><div class="wrap"><div class="section-head reveal"><div class="kicker">09 — Documentación</div><h2>Todo está escrito</h2><p class="section-sub">Cada decisión, cada límite y cada comando están documentados en el repositorio. Sin folletos: lo que funciona se muestra, lo que no, también.</p></div><div class="rich reveal"><div class="card-grid">
 <a class="card" href=""><h3>Guía completa</h3><p>Qué es, cómo funciona, instalación y límites.</p></a>
 <a class="card" href=""><h3>Manual de operación</h3><p>Requisitos, uso, parámetros y diagnóstico.</p></a>
 <a class="card" href=""><h3>Guía de código</h3><p>Arquitectura, módulos y extensión.</p></a>
 <a class="card" href=""><h3>Estado actual</h3><p>Cómo quedó el proyecto tal como está construido.</p></a>
 <a class="card" href=""><h3>Despliegue en UNO Q</h3><p>systemd, SSH, cámara IP y arranque real.</p></a>
 <a class="card" href=""><h3>Bitácora</h3><p>Registro de decisiones y evolución del proyecto.</p></a>
-</div></div></div></section>
-<section class="cta"><div class="wrap"><div class="cta-box reveal">
+</div></div></div></section><section class="section tight"><div class="wrap"><div class="section-head reveal"><div class="kicker">Lo que no funcionó</div><h2>Los tropiezos, documentados</h2><p class="section-sub">Las primeras versiones existen para que estos errores no se repitan: cada una dejó una decisión de diseño verificable.</p></div><div class="fail-grid reveal"><div class="fail"><div class="v">detector-tarjetas-completo</div><h3>Placa inaccesible para desplegar</h3><p>La UNO Q de destino, en 192.168.1.4, respondía ping y ARP pero no exponía ningún puerto TCP: ni SSH, ni HTTP, ni mDNS. Se documentaron tres caminos de instalación —habilitar SSH desde App Lab, desplegar por ADB o copiar a mano— y el despliegue físico quedó pendiente. El código y los scripts sí están terminados.</p></div><div class="fail"><div class="v">detector-tarjetas-completo</div><h3>La segunda placa igual no se detectaba</h3><p>Con dos Arduino UNO R3 iguales, el ratio test descartaba la segunda copia porque sus descriptores coincidían con la misma plantilla. Se repite el matching hasta cuatro veces por plantilla, se eliminan los keypoints dentro de la caja ya aceptada con ocho píxeles de margen y se agrupan las detecciones cercanas a 40 px.</p></div><div class="fail"><div class="v">detector-tarjetas-completo</div><h3>Homografías degeneradas generaban cajas imposibles</h3><p>RANSAC devolvía homografías degeneradas que producían cajas gigantes o fuera del encuadre. Se añadieron validaciones de proyección finita, caja mayor a un píxel, proporción de relleno mínima del 20 %, recorte al frame, tamaño mínimo de 8×8 y área entre 2 % y 90 %. Es la incidencia P-07 de la bitácora.</p></div></div></div></section><section class="section tight"><div class="wrap"><div class="section-head reveal"><div class="kicker">Ficha de evaluación</div><h2>Cómo se mide este proyecto</h2><p class="section-sub">Seis criterios con la misma escala en todo el catálogo, para comparar sin marketing.</p></div><div class="rating-head reveal"><div class="rating-avg">3.3<small>/5</small></div><div><strong>Madurez global</strong><p>Aplicación de visión clásica bien probada en laboratorio, con el despliegue en placa aún pendiente. Útil como demostración didáctica; no está lista para operar sin esa verificación.</p></div></div><div class="rating reveal"><div class="rating-row"><div class="rating-name">Madurez</div><div class="rating-bar"><i style="width:60%"></i></div><div class="rating-score">3/5</div><div class="rating-note">41 pruebas y auditoría sin incidencias; el despliegue físico en la UNO Q quedó pendiente por falta de acceso.</div></div><div class="rating-row"><div class="rating-name">Reproducibilidad</div><div class="rating-bar"><i style="width:40%"></i></div><div class="rating-score">2/5</div><div class="rating-note">El modo local funciona con webcam y OpenCV; en la placa exige SSH o ADB, y esa instalación no se verificó.</div></div><div class="rating-row"><div class="rating-name">Documentación</div><div class="rating-bar"><i style="width:80%"></i></div><div class="rating-score">4/5</div><div class="rating-note">README, bitácora con las incidencias P-01 a P-08, datasheet y guía de desarrollador cubren operación y despliegue.</div></div><div class="rating-row"><div class="rating-name">Honestidad de límites</div><div class="rating-bar"><i style="width:100%"></i></div><div class="rating-score">5/5</div><div class="rating-note">Declara el despliegue no completado, la ausencia de autenticación y que solo reconoce las etiquetas enseñadas.</div></div><div class="rating-row"><div class="rating-name">Valor demostrativo</div><div class="rating-bar"><i style="width:80%"></i></div><div class="rating-score">4/5</div><div class="rating-note">Muestra visión clásica multiinstancia, modo enseñar en caliente y fichas técnicas sin pesos externos.</div></div><div class="rating-row"><div class="rating-name">Facilidad de despliegue</div><div class="rating-bar"><i style="width:40%"></i></div><div class="rating-score">2/5</div><div class="rating-note">El entorno local se levanta con un script; la instalación en placa depende de un acceso que no se logró.</div></div></div></div></section><section class="section tight"><div class="wrap"><div class="section-head reveal"><div class="kicker">Preguntas típicas</div><h2>Lo que suelen preguntar</h2></div><div class="faq reveal"><details><summary>¿Usa inteligencia artificial?</summary><p>No en el sentido de redes neuronales: es visión clásica con ORB y homografía, sin entrenamiento pesado.</p></details><details><summary>¿Qué placas reconoce de fábrica?</summary><p>Arduino UNO R3, Arduino Nano, Raspberry Pi 4 y Raspberry Pi 5 como punto de partida.</p></details><details><summary>¿Puedo agregar otra placa?</summary><p>Sí, desde /teach: capturás muestras de su etiqueta y quedan disponibles sin reiniciar el detector.</p></details><details><summary>¿Funciona de noche o con poca luz?</summary><p>Necesita ver la etiqueta con contraste. Con poca luz baja la cantidad de keypoints y la detección se vuelve intermitente.</p></details><details><summary>¿Está protegido con contraseña?</summary><p>No. Está pensado para una LAN de confianza; no lo expongas directo a Internet.</p></details></div></div></section><section class="cta"><div class="wrap"><div class="cta-box reveal">
   <div class="kicker">Siguiente paso</div><h2>¿Te animás?</h2>
   <p>Usá esta familia como base para detector de tarjetas. Está documentada para que puedas entenderla, ejecutarla y continuarla sin adivinar.</p>
   <div class="hero-actions" style="justify-content:center"><a class="btn btn-primary" href="https://github.com/jmadasme/detector-tarjetas" target="_blank" rel="noopener">Abrir el repositorio <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn btn-ghost" href="/arduino-unoq/">Ver más de Arduino</a></div>
