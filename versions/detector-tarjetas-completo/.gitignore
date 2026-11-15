@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.coverage
+
+# Entornos virtuales
+venv/
+.venv/
+env/
+
+# Sistema
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
+
+# Secretos / configuración local
+.env
+*.local
+
+# Artefactos del pipeline (no se publican)
+PLAN.md
+AUDIT_REPORT.md
+
+# Plantillas ORB generadas en runtime (solo se versiona .gitkeep)
+data/templates/*
+!data/templates/.gitkeep
+
+# Fotos de seed para entrenamiento (pesadas, no se versionan)
+scripts/seed_images/
+
+# Temporales
+*.tmp
+*.swp
